@@ -52,8 +52,9 @@
     if (!items.length) { el.parentNode.style.display = 'none'; return; }
     el.innerHTML = items.map(function (g) {
       var flyer = g.flyer
-        ? '<div class="flyer"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"></div>'
-        : '<div class="flyer">チラシ準備中</div>';
+        ? '<div class="flyer"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"' +
+          ' data-flyer="' + esc(g.flyer) + '" data-flyer-back="' + esc(g.flyerBack || '') + '" data-title="' + esc(g.title) + '"></div>'
+        : '<div class="flyer">チラシなし</div>';
       var meta = [g.venue, g.time, g.note].filter(Boolean).map(esc).join('<br>');
       var inner = flyer +
         '<time>' + esc(g.date) + '</time>' +
@@ -72,8 +73,9 @@
     }
     el.innerHTML = items.map(function (g) {
       var thumb = g.flyer
-        ? '<div class="thumb"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"></div>'
-        : '<div class="thumb">チラシ準備中</div>';
+        ? '<div class="thumb"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"' +
+          ' data-flyer="' + esc(g.flyer) + '" data-flyer-back="' + esc(g.flyerBack || '') + '" data-title="' + esc(g.title) + '"></div>'
+        : '<div class="thumb">チラシなし</div>';
       var lines = [g.venue, g.time].filter(Boolean).map(esc).join('<br>');
       return '<li>' + thumb + '<div>' +
         '<time>' + esc(g.date) + '</time>' +
@@ -83,6 +85,65 @@
         (g.link ? '<br><a class="detail-link" href="' + esc(g.link) + '">詳しく見る</a>' : '') +
         '</div></li>';
     }).join('');
+  }
+
+  /* ── チラシの拡大表示 ── */
+  function setupLightbox() {
+    var box = document.createElement('div');
+    box.className = 'lightbox';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.innerHTML =
+      '<button type="button" class="lb-close" aria-label="閉じる">×</button>' +
+      '<img alt="">' +
+      '<button type="button" class="lb-flip" hidden></button>';
+    document.body.appendChild(box);
+
+    var img = box.querySelector('img');
+    var flipBtn = box.querySelector('.lb-flip');
+    var closeBtn = box.querySelector('.lb-close');
+    var front = '', back = '', title = '', showingBack = false, opener = null;
+
+    function render() {
+      img.src = showingBack ? back : front;
+      img.alt = title + (showingBack ? 'のチラシ（裏面）' : 'のチラシ');
+      flipBtn.textContent = showingBack ? '表面を見る' : '裏面を見る';
+    }
+
+    function open(el) {
+      front = el.getAttribute('data-flyer') || el.src;
+      back = el.getAttribute('data-flyer-back') || '';
+      title = el.getAttribute('data-title') || el.alt || '';
+      showingBack = false;
+      flipBtn.hidden = !back;
+      opener = el;
+      render();
+      box.classList.add('show');
+      closeBtn.focus();
+      document.addEventListener('keydown', onKey);
+    }
+
+    function close() {
+      box.classList.remove('show');
+      document.removeEventListener('keydown', onKey);
+      if (opener) opener.focus();
+    }
+
+    function onKey(e) {
+      if (e.key === 'Escape') close();
+    }
+
+    document.addEventListener('click', function (e) {
+      var t = e.target.closest('.flyer img, .thumb img');
+      if (!t) return;
+      e.preventDefault();
+      e.stopPropagation();
+      open(t);
+    });
+
+    flipBtn.addEventListener('click', function () { showingBack = !showingBack; render(); });
+    closeBtn.addEventListener('click', close);
+    box.addEventListener('click', function (e) { if (e.target === box) close(); });
   }
 
   /* ── スクロールに合わせた表示 ── */
@@ -138,5 +199,6 @@
     loadGigs();
     reveal();
     railAndCta();
+    setupLightbox();
   });
 })();

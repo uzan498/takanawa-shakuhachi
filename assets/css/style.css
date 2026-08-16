@@ -62,7 +62,7 @@ h1 u{text-decoration:none;display:inline-block;border-bottom:4px solid var(--shu
 /* 下位ページの見出し帯 */
 .phead{background:var(--navy);color:var(--paper);padding:86px 0 78px}
 .phead h1{font-size:clamp(28px,5vw,48px);margin:0}
-.phead p{margin:20px 0 0;font-size:15px;opacity:.65;max-width:34em}
+.phead p{margin:20px 0 0;font-size:15px;opacity:.65}
 
 /* ── 最新情報の1行帯 ── */
 .latest{border-bottom:1px solid var(--line);background:var(--paper)}
@@ -101,7 +101,9 @@ dl.spec dt{color:var(--grey);font-size:12.5px;letter-spacing:.1em;padding:20px 0
 dl.spec dd{margin:0;padding:17px 0 18px;color:var(--body)}
 dl.spec dt,dl.spec dd{border-bottom:1px solid var(--line)}
 .free{color:var(--shu-d)}
-.ph{background:var(--paper-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--grey);font-size:12px;letter-spacing:.14em;text-align:center;padding:20px;line-height:2}
+.ph{background:var(--paper-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--grey);font-size:12px;letter-spacing:.14em;text-align:center;padding:20px;line-height:2;overflow:hidden}
+.ph:has(img){padding:0}
+.ph img{width:100%;height:100%;object-fit:cover}
 .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:60px}
 .facts div{background:var(--paper);padding:36px 28px}
 .facts b{display:block;font-family:var(--m);font-size:34px;font-weight:400;margin-bottom:8px}
@@ -134,9 +136,9 @@ details p{margin:16px 0 0;font-size:15px;color:var(--body);max-width:46em}
 .artist .num{color:var(--paper);opacity:.5}
 .inner{display:grid;grid-template-columns:auto 1fr;gap:52px;align-items:center;margin-bottom:64px}
 .vname{writing-mode:vertical-rl;font-family:var(--m);display:flex;gap:18px;border-right:2px solid var(--shu);padding-right:24px;height:auto}
-.vname b{font-weight:400;font-size:40px;letter-spacing:.18em}
-.vname small{font-size:12px;letter-spacing:.3em;opacity:.6;align-self:flex-start}
-.artist p.txt{margin:0 0 30px;font-size:15.5px;opacity:.8;max-width:32em}
+.vname b{font-weight:400;font-size:40px;letter-spacing:.18em;white-space:nowrap}
+.vname small{font-size:12px;letter-spacing:.3em;opacity:.6;align-self:flex-start;white-space:nowrap}
+.artist p.txt{margin:0 0 30px;font-size:15.5px;opacity:.8}
 .btns{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-block;text-decoration:none;font-size:14px;letter-spacing:.12em;padding:16px 30px;border:1px solid rgba(245,243,237,.4);transition:.25s}
 .btn:hover,.btn:focus-visible{background:var(--paper);color:var(--navy);border-color:var(--paper)}
@@ -169,18 +171,22 @@ details p{margin:16px 0 0;font-size:15px;color:var(--body);max-width:46em}
 .list a.detail-link:hover,.list a.detail-link:focus-visible{color:var(--shu-d)}
 @media(max-width:760px){.list li{grid-template-columns:1fr;gap:20px}.list .thumb{aspect-ratio:16/10}}
 
-/* ── プロフィール ── */
-.profile{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
-.profile .bio p{margin:0 0 24px;font-size:15.5px;color:var(--body)}
-.pside{display:flex;flex-direction:column;gap:40px}
-.pblock h3{margin:0 0 4px;font-weight:400;font-size:11.5px;letter-spacing:.22em;color:var(--shu-d)}
+/* ── プロフィール：写真＋あいさつ ── */
+.ptop{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start;margin-bottom:72px}
+.ptop .bio p{margin:0 0 24px;font-size:15.5px;color:var(--body)}
+
+/* ── プロフィール：略歴＋資格 ── */
+.plower-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start}
+.pblock h3{margin:0 0 18px;font-weight:400;font-size:20px;letter-spacing:.05em;color:var(--navy)}
 .history{margin:0;display:grid;grid-template-columns:4.6em 1fr;gap:0 14px;font-size:13px;line-height:1.6;border-top:1px solid var(--line)}
 .history dt{color:var(--grey);font-size:11.5px;letter-spacing:.04em;padding:10px 0 9px;font-family:var(--m)}
 .history dd{margin:0;padding:10px 0 9px;color:var(--body)}
 .history dt,.history dd{border-bottom:1px solid var(--line)}
 .creds{margin:0;list-style:none;padding:0;border-top:1px solid var(--line)}
 .creds li{padding:9px 0;font-size:13px;line-height:1.55;color:var(--body);border-bottom:1px solid var(--line)}
-@media(max-width:860px){.profile{grid-template-columns:1fr;gap:44px}}
+.pvideo{margin-top:50px;aspect-ratio:16/9;background:var(--navy);overflow:hidden}
+.pvideo iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:860px){.ptop{grid-template-columns:1fr;gap:36px;margin-bottom:48px}.plower-grid{grid-template-columns:1fr;gap:40px}}
 
 /* ── 申し込み ── */
 .apply{background:var(--paper-2)}
@@ -220,3 +226,14 @@ footer p{margin:30px 0 0;line-height:2.2}
 .rv.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
 :focus-visible{outline:2px solid var(--shu);outline-offset:4px}
+
+/* ── チラシの拡大表示 ── */
+.flyer img,.thumb img{cursor:zoom-in}
+.lightbox{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:60px 24px;background:rgba(15,25,34,.92);opacity:0;visibility:hidden;transition:opacity .25s ease}
+.lightbox.show{opacity:1;visibility:visible}
+.lightbox img{max-width:min(88vw,640px);max-height:76vh;width:auto;height:auto;object-fit:contain;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.lightbox .lb-close{position:absolute;top:22px;right:26px;background:none;border:0;color:var(--paper);font-size:32px;line-height:1;cursor:pointer;padding:8px}
+.lightbox .lb-flip{display:inline-block;background:none;border:1px solid rgba(245,243,237,.4);color:var(--paper);font-size:14px;letter-spacing:.1em;padding:11px 24px;cursor:pointer;transition:.25s}
+.lightbox .lb-flip[hidden]{display:none}
+.lightbox .lb-flip:hover,.lightbox .lb-flip:focus-visible{background:var(--paper);color:var(--navy);border-color:var(--paper)}
+@media(max-width:600px){.lightbox{padding:60px 16px}.lightbox .lb-close{top:12px;right:14px}}
