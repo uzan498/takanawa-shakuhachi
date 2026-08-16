@@ -7,7 +7,7 @@
   --shu:#C4442E;
   --shu-d:#A63722;
   --body:#3B4448;
-  --grey:#727B7C;
+  --grey:#616B6C;
   --line:rgba(15,25,34,.13);
   --line-d:rgba(245,243,237,.18);
   --g:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
@@ -50,7 +50,7 @@ header{background:var(--paper);border-bottom:1px solid var(--line);position:stic
 
 /* ── ヒーロー ── */
 .hero{background:var(--navy);color:var(--paper);padding:130px 0 118px}
-.eyebrow{font-size:11.5px;letter-spacing:.32em;opacity:.55;margin:0 0 34px}
+.eyebrow{font-size:13.5px;letter-spacing:.28em;opacity:.85;margin:0 0 34px}
 h1{margin:0 0 34px;font-weight:300;font-size:clamp(36px,6.6vw,70px);line-height:1.34;letter-spacing:.02em}
 h1 u{text-decoration:none;display:inline-block;border-bottom:4px solid var(--shu);padding-bottom:8px}
 .lede{margin:0 0 44px;font-size:16px;opacity:.8;max-width:29em;line-height:2.1}
@@ -79,7 +79,7 @@ section{padding:118px 0}
 .head{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start;margin-bottom:56px}
 .num{writing-mode:vertical-rl;font-family:var(--m);font-size:14px;letter-spacing:.32em;color:var(--shu-d);padding-top:9px}
 h2{margin:0;font-weight:300;font-size:clamp(26px,4.2vw,42px);letter-spacing:.03em;line-height:1.45}
-.head p{margin:16px 0 0;color:var(--grey);font-size:15px;max-width:36em}
+.head p{margin:16px 0 0;color:var(--grey);font-size:15px}
 @media(max-width:700px){section{padding:78px 0}.head{gap:16px;margin-bottom:36px}.num{writing-mode:horizontal-tb;padding-top:0}}
 
 /* ── 対象の振り分け ── */
@@ -119,7 +119,7 @@ dl.spec dt,dl.spec dd{border-bottom:1px solid var(--line)}
 .pgrid .ph{aspect-ratio:1/1;background:var(--paper)}
 
 /* ── Q&A ── */
-details{border-top:1px solid var(--line);padding:26px 0}
+details{border-top:1px solid var(--line);padding:16px 0}
 details:last-of-type{border-bottom:1px solid var(--line)}
 summary{cursor:pointer;list-style:none;font-size:17px;display:flex;gap:18px;align-items:baseline;line-height:1.8}
 summary::-webkit-details-marker{display:none}
