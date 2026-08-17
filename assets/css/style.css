@@ -27,10 +27,8 @@ img{max-width:100%;display:block}
 /* ── 左のレール（尺八の孔＝現在地） ── */
 .rail{position:fixed;left:0;top:0;bottom:0;width:var(--rail);z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--navy)}
 .rail::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:currentColor;opacity:.18}
-.rail.dark{color:var(--paper)}
 .rail a{position:relative;display:block;width:44px;height:76px;text-decoration:none}
 .rail a i{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;border-radius:50%;border:1px solid currentColor;background:var(--paper);transition:.3s}
-.rail.dark a i{background:var(--navy)}
 .rail a span{position:absolute;left:calc(50% + 15px);top:50%;transform:translateY(-50%);writing-mode:vertical-rl;font-size:11.5px;letter-spacing:.26em;white-space:nowrap;opacity:0;transition:.3s}
 .rail a:hover span,.rail a:focus-visible span,.rail a.active span{opacity:.72}
 .rail a.active i{background:var(--shu);border-color:var(--shu);transform:translate(-50%,-50%) scale(1.35)}
@@ -48,8 +46,39 @@ header{background:var(--paper);border-bottom:1px solid var(--line);position:stic
 .en:hover,.en:focus-visible{background:var(--navy);color:var(--paper) !important;border-color:var(--navy) !important}
 @media(max-width:960px){.hnav a:not(.en){display:none}}
 
+/* ── ハンバーガー ── */
+.hbg{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;margin-left:4px;padding:0;background:none;border:0;cursor:pointer;flex:none}
+.hbg i{display:block;width:22px;height:1px;background:var(--navy);margin:0 auto}
+@media(max-width:960px){.hbg{display:flex}.bar{gap:10px}}
+.menu{position:fixed;left:0;right:0;top:72px;z-index:29;background:var(--paper);border-bottom:1px solid var(--line);
+  transform:translateY(-100%);visibility:hidden;transition:transform .38s ease,visibility .38s}
+.menu.open{transform:none;visibility:visible}
+.menu .wrap{padding-top:8px;padding-bottom:26px}
+.menu a{display:block;text-decoration:none;font-family:var(--m);font-size:17px;letter-spacing:.1em;padding:17px 2px;border-bottom:1px solid var(--line);color:var(--navy)}
+.menu a:last-child{border-bottom:0}
+body.menu-open{overflow:hidden}
+body.menu-open .mobile-cta{transform:translateY(100%)}
+@media(min-width:961px){.menu{display:none}}
+@media(prefers-reduced-motion:reduce){.menu{transition:none}}
+
 /* ── ヒーロー ── */
-.hero{background:var(--navy);color:var(--paper);padding:130px 0 118px}
+.hero{position:relative;overflow:hidden;background:var(--navy);color:var(--paper);padding:118px 0 112px}
+.hero > .wrap{position:relative;z-index:2;width:100%}
+.hero-bg{position:absolute;inset:0;z-index:1;
+  background-image:url("../../images/hero-wide.jpg");
+  background-size:auto 100%;          /* 高さ基準。画面を広げても拡大しない */
+  background-position:right center;
+  background-color:#000B13;           /* 画像左端と同色。継ぎ目を消す */
+  background-repeat:no-repeat}
+.hero-bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(95deg,rgba(15,25,34,.82) 0%,rgba(15,25,34,.66) 40%,rgba(15,25,34,.18) 72%,rgba(15,25,34,0) 100%)}
+
+/* 名乗り */
+.byline{display:flex;flex-direction:column;gap:10px;margin:0 0 32px}
+.bl-name{font-family:var(--m);font-size:clamp(17px,2.35vw,24px);letter-spacing:.12em;line-height:1.7}
+.bl-note{font-size:11.5px;letter-spacing:.2em;opacity:.55}
+@media(max-width:600px){.bl-name{letter-spacing:.08em}}
+
 .eyebrow{font-size:13.5px;letter-spacing:.28em;opacity:.85;margin:0 0 34px}
 h1{margin:0 0 34px;font-weight:300;font-size:clamp(36px,6.6vw,70px);line-height:1.34;letter-spacing:.02em}
 h1 u{text-decoration:none;display:inline-block;border-bottom:4px solid var(--shu);padding-bottom:8px}
@@ -57,7 +86,25 @@ h1 u{text-decoration:none;display:inline-block;border-bottom:4px solid var(--shu
 .venue{margin:0 0 46px;font-size:13px;letter-spacing:.1em;opacity:.55;padding-left:16px;border-left:2px solid var(--shu);line-height:2.2}
 .jump{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-size:14px;letter-spacing:.12em;border-bottom:1px solid var(--line-d);padding-bottom:8px;transition:.25s}
 .jump:hover,.jump:focus-visible{border-color:var(--paper);gap:18px}
-@media(max-width:900px){.hero{padding:78px 0 70px}}
+@media(min-width:761px) and (max-width:900px){.hero{padding:78px 0 70px}}
+
+/* 幅が足りないときは、紺のマスクを右まで伸ばして顔を沈める
+   （縦レイアウトになる画面では、下の指定が上書きします） */
+@media (max-width:1560px){
+  .hero-bg::after{background:linear-gradient(95deg,
+    rgba(15,25,34,.90) 0%,rgba(15,25,34,.84) 46%,rgba(15,25,34,.50) 76%,rgba(15,25,34,.14) 100%)}
+}
+
+/* 縦長〜正方形に近い画面は、文字を上・顔を下に */
+@media (max-width:1200px) and (max-aspect-ratio:5/4){
+  .hero{min-height:100svh;display:flex;align-items:flex-start;padding:64px 0 40px}
+  .hero-bg{background-image:url("../../images/hero-tall.jpg");
+    background-size:cover;background-position:58% bottom}
+  .hero-bg::after{background:linear-gradient(180deg,
+    rgba(15,25,34,.95) 0%,rgba(15,25,34,.90) 34%,rgba(15,25,34,.62) 62%,rgba(15,25,34,.30) 100%)}
+}
+/* 教室名2行は、スマホでは場所を譲る */
+@media (max-width:760px){ .hero .venue{display:none} }
 
 /* 下位ページの見出し帯 */
 .phead{background:var(--navy);color:var(--paper);padding:86px 0 78px}
@@ -104,11 +151,30 @@ dl.spec dt,dl.spec dd{border-bottom:1px solid var(--line)}
 .ph{background:var(--paper-2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--grey);font-size:12px;letter-spacing:.14em;text-align:center;padding:20px;line-height:2;overflow:hidden}
 .ph:has(img){padding:0}
 .ph img{width:100%;height:100%;object-fit:cover}
-.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin-top:60px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);margin:0 0 60px}
 .facts div{background:var(--paper);padding:36px 28px}
 .facts b{display:block;font-family:var(--m);font-size:34px;font-weight:400;margin-bottom:8px}
 .facts p{margin:0;font-size:13.5px;color:var(--grey);line-height:1.95}
+.soudan{display:inline-block;margin-top:6px;font-size:13.5px;color:var(--grey)}
+.soudan a{text-decoration:none;border-bottom:1px solid var(--shu);padding-bottom:2px;color:var(--body)}
+.soudan a:hover,.soudan a:focus-visible{color:var(--shu-d)}
 @media(max-width:860px){.detail{grid-template-columns:1fr;gap:36px}.facts{grid-template-columns:1fr}}
+
+/* ── 小中高生に ── */
+.kidsgrid{display:grid;grid-template-columns:1fr .62fr;gap:56px;align-items:start}
+.kidsbody p{margin:0 0 22px;font-size:15.5px;color:var(--body);line-height:2.15}
+.kidsbody p.last{margin-top:36px;margin-bottom:0}
+.kidsend{margin:48px 0 0;padding-top:24px;border-top:1px solid var(--line)}
+.kidsgo{margin:0;font-size:15.5px;color:var(--body);line-height:2}
+.kidsgo::before{content:"── ";color:var(--grey)}
+.kidsgo a{margin-left:.5em;text-decoration:none;font-size:16px;letter-spacing:.06em;border-bottom:1px solid var(--shu);padding-bottom:3px;white-space:nowrap}
+.kidsgo a::after{content:" →"}
+.kidsgo a:hover,.kidsgo a:focus-visible{color:var(--shu-d)}
+.kidstel{margin:16px 0 0;padding-left:1.4em;font-size:13px;color:var(--grey);line-height:1.95}
+.kidstel a{text-decoration:none;color:var(--body);border-bottom:1px solid var(--line);padding-bottom:2px}
+.kidstel a:hover,.kidstel a:focus-visible{color:var(--shu-d);border-color:var(--shu)}
+.kidstel span{font-size:12.5px}
+@media(max-width:860px){.kidsgrid{grid-template-columns:1fr;gap:36px}}
 
 /* ── はじめての日 ── */
 .steps{list-style:none;margin:0;padding:0}
@@ -191,19 +257,20 @@ details p{margin:16px 0 0;font-size:15px;color:var(--body);max-width:46em}
 /* ── 申し込み ── */
 .apply{background:var(--paper-2)}
 .reassure{font-family:var(--m);font-size:clamp(20px,3vw,27px);letter-spacing:.04em;margin:0 0 44px;padding-left:20px;border-left:3px solid var(--shu);line-height:1.85}
-.rooms2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
-.room2{background:var(--paper-2);padding:40px 34px}
-.room2 small{font-size:11.5px;letter-spacing:.2em;color:var(--shu-d);display:block;margin-bottom:14px}
-.room2 h3{margin:0 0 6px;font-weight:400;font-size:20px;letter-spacing:.05em}
-.room2 .sub2{margin:0 0 24px;font-size:13.5px;color:var(--grey)}
+.applybox{border:1px solid var(--line);background:var(--paper-2)}
+.venue2{padding:32px 34px 26px;border-bottom:1px solid var(--line)}
+.venue2 h3{margin:0 0 6px;font-weight:400;font-size:21px;letter-spacing:.05em;line-height:1.6}
+.venue2 .sub2{margin:0;font-size:13.5px;color:var(--grey)}
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+.way{background:var(--paper-2);padding:32px 34px 34px}
+.way small{font-size:11.5px;letter-spacing:.2em;color:var(--shu-d);display:block;margin-bottom:16px}
+.note2{margin:16px 0 0;font-size:13px;color:var(--body);line-height:1.9}
 .tel{font-family:var(--m);font-size:26px;letter-spacing:.03em;text-decoration:none;border-bottom:1px solid var(--shu);padding-bottom:5px;display:inline-block}
 .tel:hover,.tel:focus-visible{color:var(--shu-d)}
 .hours{margin:16px 0 0;font-size:13px;color:var(--grey)}
-.direct{margin-top:1px;background:var(--paper-2);padding:40px 34px;border-top:1px solid var(--line)}
-.direct p{margin:0 0 16px;font-size:14.5px;color:var(--body)}
 .mail{font-family:var(--m);font-size:21px;letter-spacing:.02em;text-decoration:none;border-bottom:1px solid var(--shu);padding-bottom:5px;display:inline-block;word-break:break-all}
 .mail:hover,.mail:focus-visible{color:var(--shu-d)}
-@media(max-width:760px){.rooms2{grid-template-columns:1fr}.room2,.direct{padding:32px 24px}}
+@media(max-width:760px){.ways{grid-template-columns:1fr}.venue2,.way{padding:28px 24px}}
 
 /* ── 問い合わせ ── */
 .uses{list-style:none;margin:0 0 32px;padding:0;display:flex;flex-wrap:wrap;gap:10px}
@@ -215,6 +282,7 @@ footer{background:var(--navy);color:rgba(245,243,237,.55);padding:60px 0 108px;f
 .fnav a{text-decoration:none}
 .fnav a:hover,.fnav a:focus-visible{color:var(--paper)}
 footer p{margin:30px 0 0;line-height:2.2}
+footer .owner{margin-top:18px;font-size:12px;opacity:.7}
 @media(min-width:761px){footer{padding-bottom:64px}}
 
 /* ── スマホ下部の固定ボタン ── */

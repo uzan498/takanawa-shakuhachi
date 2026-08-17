@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>高輪尺八教室｜東京都港区・初心者歓迎・会費無料</title>
 <meta name="description" content="東京都港区高輪の尺八教室。会費無料、楽器の貸出あり、手ぶらで通えます。初心者歓迎。都山流大師範 片岡雨山が指導します。港区外の方もご相談ください。">
+<meta name="theme-color" content="#0F1922">
 <meta property="og:title" content="高輪尺八教室｜東京都港区・初心者歓迎・会費無料">
 <meta property="og:description" content="会費無料、楽器の貸出あり。手ぶらで通える港区の尺八教室です。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://uzan498.github.io/takanawa-shakuhachi/index.html">
+<meta property="og:image" content="https://uzan498.github.io/takanawa-shakuhachi/images/ogp.jpg">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500&family=Shippori+Mincho+B1:wght@400;600&display=swap" rel="stylesheet">
@@ -15,14 +19,13 @@
 </head>
 <body class="has-rail">
 
-<nav class="rail dark" aria-label="ページ内の現在地">
-  <a href="#who"><i></i><span>どちらの方ですか</span></a>
+<nav class="rail" aria-label="ページ内の現在地">
   <a href="#class"><i></i><span>高輪の教室</span></a>
   <a href="#first"><i></i><span>はじめての日</span></a>
-  <a href="#qa"><i></i><span>よくある質問</span></a>
-  <a href="#artist"><i></i><span>講師・演奏情報</span></a>
   <a href="#apply"><i></i><span>申し込み</span></a>
-  <a href="#contact"><i></i><span>お問い合わせ</span></a>
+  <a href="#qa"><i></i><span>よくある質問</span></a>
+  <a href="#kids"><i></i><span>小中高生に</span></a>
+  <a href="#artist"><i></i><span>片岡雨山</span></a>
 </nav>
 
 <header>
@@ -36,16 +39,32 @@
       <a href="#apply">申し込み</a>
       <a class="en" href="en.html">EN</a>
     </div>
+    <button type="button" class="hbg" id="hbg" aria-expanded="false" aria-controls="menu" aria-label="メニューを開く">
+      <i></i><i></i><i></i>
+    </button>
   </div>
 </header>
 
-<div class="hero" id="top">
+<div class="menu" id="menu" aria-hidden="true">
   <div class="wrap">
-    <p class="eyebrow">東京都港区　都山流尺八</p>
+    <a href="#class">教室について</a>
+    <a href="#first">はじめての方へ</a>
+    <a href="#apply">申し込み</a>
+    <a href="#qa">よくある質問</a>
+    <a href="performances.html">出演情報</a>
+    <a href="profile.html">講師・演奏依頼</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+</div>
+
+<div class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <p class="byline"><span class="bl-name">高輪尺八教室　講師　片岡 雨山</span><span class="bl-note">都山流尺八 大師範／東京都港区</span></p>
     <h1>会費は、<u>無料</u>。<br>楽器は、貸します。</h1>
     <p class="lede">港区が地域の交流事業として開いている尺八教室です。楽譜が読めなくても、楽器を持っていなくても始められます。手ぶらでお越しください。</p>
     <p class="venue">港区立高輪いきいきプラザ 尺八教室<br>港区立神明子ども中高生プラザ 尺八教室</p>
-    <a class="jump" href="#who">教室のことを見る　↓</a>
+    <a class="jump" href="#class">教室のことを見る　↓</a>
   </div>
 </div>
 
@@ -53,63 +72,31 @@
   <div class="wrap" id="latest-line"></div>
 </div>
 
-<section id="who">
+<section id="class">
   <div class="wrap">
     <div class="head rv">
       <span class="num">一</span>
       <div>
-        <h2>どちらに当てはまりますか</h2>
-        <p>２教室は港区の事業のため、対象が決まっています。当てはまらない場合も、まずはご相談ください。</p>
-      </div>
-    </div>
-    <div class="rt rv">
-      <div class="main">
-        <small>全世代</small>
-        <h3>高輪尺八教室</h3>
-        <p>港区立高輪いきいきプラザが主催しています。小学4年生以上の港区の方が参加できます。会費は無料、楽器もお貸しします。</p>
-        <a href="#class">教室のことを見る</a>
-      </div>
-      <div>
-        <small>小・中・高校生</small>
-        <h3>神明尺八教室</h3>
-        <p>港区立神明子ども中高生プラザが主催している、小中高生対象の無料の体験教室です。楽器もお貸しします。</p>
-        <a href="#apply">連絡先を見る</a>
-      </div>
-      <div>
-        <small>港区外の方</small>
-        <h3>ご相談ください</h3>
-        <p>高輪尺八教室は原則として港区の方が対象ですが、区外にお住まいの方は個別にご相談を承っています。一度ご連絡ください。</p>
-        <a href="#contact">問い合わせる</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="class">
-  <div class="wrap">
-    <div class="head rv">
-      <span class="num">二</span>
-      <div>
         <h2>高輪尺八教室</h2>
         <p>港区立高輪いきいきプラザの集会室で、月に3回開いています。</p>
       </div>
+    </div>
+    <div class="facts rv">
+      <div><b>五分</b><p>早い方は、初日の五分ほどで音が出ます。</p></div>
+      <div><b>〇円</b><p>会費・月謝、かかりません。</p></div>
+      <div><b>月三回</b><p>毎回でも、月に一度でも構いません。</p></div>
     </div>
     <div class="detail rv">
       <dl class="spec">
         <dt>会場</dt><dd>港区立高輪いきいきプラザ 集会室<br>港区高輪3-18-15</dd>
         <dt>行き方</dt><dd>品川駅・泉岳寺駅から徒歩8分<br>高輪ゲートウェイ駅から徒歩7分</dd>
         <dt>開催</dt><dd>毎月3回（平日夜間／土日の午前・午後 ほか）</dd>
-        <dt>対象</dt><dd>港区の方（区外の方はお問い合わせから連絡ください）</dd>
         <dt>会費</dt><dd class="free">無料</dd>
         <dt>楽器</dt><dd>無料で貸出しています。お持ちの方は持参いただいても構いませんが、無い場合は買わないでください。</dd>
         <dt>内容</dt><dd>古曲、本曲、合奏曲、洋楽のほか、歌謡曲やボサノヴァなども可能です。また、ご希望により、公益財団法人都山流尺八楽会の免許取得もできます</dd>
+        <dt>対象</dt><dd>港区にお住まいの方（小学4年生以上）<br><span class="soudan">区外にお住まいの方は、<a href="#apply">講師までご相談ください</a>。</span></dd>
       </dl>
       <div class="ph" style="aspect-ratio:4/5">教室の様子（4:5）</div>
-    </div>
-    <div class="facts rv">
-      <div><b>五分</b><p>早い方は、初日の五分ほどで音が出ます。</p></div>
-      <div><b>〇円</b><p>会費・月謝、かかりません。</p></div>
-      <div><b>月三回</b><p>毎回でも、月に一度でも構いません。</p></div>
     </div>
   </div>
 </section>
@@ -117,9 +104,9 @@
 <section id="first" style="background:var(--paper-2)">
   <div class="wrap">
     <div class="head rv">
-      <span class="num">三</span>
+      <span class="num">二</span>
       <div>
-        <h2>はじめての日のこと（高輪尺八教室）</h2>
+        <h2>はじめての日のこと</h2>
         <p>持ち物はありません。服装も普段着で構いません。</p>
       </div>
     </div>
@@ -135,6 +122,37 @@
         <div class="ph"><img src="images/kyousi.JPG" alt="稽古の様子" loading="lazy"></div>
         <div class="ph"><img src="images/temoto.jpg" alt="手元の寄り" loading="lazy"></div>
         <div class="ph">教室の全景</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="apply">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="num">三</span>
+      <div>
+        <h2>高輪尺八教室に参加したい方へ</h2>
+        <p>講師の片岡雨山あてに、メールでご連絡ください。「尺八教室に参加したい」とお伝えいただければ、開催日をご案内します（予約制）。港区立高輪いきいきプラザへ直接お電話いただいても構いません。</p>
+      </div>
+    </div>
+    <p class="reassure rv">見学だけでも構いません。</p>
+    <div class="applybox rv">
+      <div class="venue2">
+        <h3>港区立高輪いきいきプラザ　尺八教室</h3>
+        <p class="sub2">港区高輪三丁目１８番１５号</p>
+      </div>
+      <div class="ways">
+        <div class="way">
+          <small>直接講師へ</small>
+          <a class="mail" href="mailto:mt.rain@outlook.com?subject=%E5%B0%BA%E5%85%AB%E6%95%99%E5%AE%A4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">mt.rain@outlook.com</a>
+          <p class="note2">港区外にお住まいの方は、講師までご相談ください。</p>
+        </div>
+        <div class="way">
+          <small>施設へ</small>
+          <a class="tel" href="tel:0334491643">03-3449-1643</a>
+          <p class="hours">受付時間　9:00〜21:30（日曜は17：00まで）</p>
+        </div>
       </div>
     </div>
   </div>
@@ -160,7 +178,7 @@
       </details>
       <details>
         <summary>子どもに習わせたいのですが。</summary>
-        <p>ぜひお越しください。高輪いきいきプラザの教室は小学4年生以上が対象です（月３回）。神明子ども中高生プラザの方は小中高生が体験できます（月１回）。</p>
+        <p>ぜひお越しください。高輪いきいきプラザの教室は小学4年生以上が対象です（月３回）。神明子ども中高生プラザの方は小中高生が体験できます（月１回）。港区立の中学校では、毎年、体験授業も行っています。</p>
       </details>
       <details>
         <summary>尺八を持っていません。買ってから行くべきですか。</summary>
@@ -174,7 +192,7 @@
         <summary>個人で教わるのですか、みんなで習うのですか。</summary>
         <p>基本は一人ずつお教えします。お友達とご一緒でも構いません。合奏の指導は集団で行います。</p>
       </details>
-            <details>
+      <details>
         <summary>港区に住んでいませんが、通えますか。</summary>
         <p>高輪いきいきプラザの尺八教室は、区内にお住まいの方が対象です。区外でも尺八をやってみたいという方は、直接お問い合わせから講師にメールしてみてください。神明の方は小中高生であればどなたでも可です。</p>
       </details>
@@ -190,6 +208,31 @@
         <summary>都山流ってなんですか。</summary>
         <p>尺八の流派の一つです。ほかに琴古流などがあります。都山流は、初代の中尾都山という方がはじめ、今でも多くの奏者がいます。流祖の中尾都山先生は、東京に進出した際に白金や赤坂に住んでいたそうです。今でいう港区ですね。当教室では、そんな港区と縁のある都山流尺八を習うことができます。</p>
       </details>
+    </div>
+  </div>
+</section>
+
+<section id="kids" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="num">五</span>
+      <div>
+        <h2>小中高生にも、尺八を広めています</h2>
+        <p>はじめての子でも、たいてい音は出ます。お子さんも安心してお越しください。</p>
+      </div>
+    </div>
+    <div class="kidsgrid rv">
+      <div class="kidsbody">
+        <p>高輪いきいきプラザの尺八教室は、小学4年生から参加できます。お一人でも家族、お友達とでも、大歓迎です。</p>
+        <p>港区立神明子ども中高生プラザでも、月に一回ですが、小中高生に教えています。毎回来る子もいれば、何か月かおきに来る子もいます。</p>
+        <p>そのほか、年に数回、港区立の中学校から依頼を受けて、日本文化体験授業の尺八を受け持っています。授業では十数人が一度に吹きはじめますが、音が出た子を隣の子が真似たり、私が個別にアドバイスしていることを周囲の子も聞いていたりと、工夫して取り組んでくれます。途中で疲れてくるので、知っている曲や伝統的な曲を聴く時間もつくります。</p>
+        <p class="last">終わったあと「音を鳴らすのがちょっと難しい。でもそれが楽しかった」と書いてくれた子がいました。</p>
+      </div>
+      <div class="ph" style="aspect-ratio:2/3">貸出用の尺八（2:3）</div>
+    </div>
+    <div class="kidsend rv">
+      <p class="kidsgo">お子さんの参加も、申し込み方法は同じです。<a href="#apply">申し込みを見る</a></p>
+      <p class="kidstel">神明子ども中高生プラザへの参加は、直接お電話ください。<a href="tel:0357335199">03-5733-5199</a><span>（受付 9:30〜20:00）</span></p>
     </div>
   </div>
 </section>
@@ -212,43 +255,10 @@
   </div>
 </section>
 
-<section id="apply" class="apply">
-  <div class="wrap">
-    <div class="head rv">
-      <span class="num">五</span>
-      <div>
-        <h2>教室に参加したい方へ</h2>
-        <p>各施設または講師にご連絡ください。「尺八教室に参加したい」とお伝えいただければ、開催日をご案内します（予約制）。</p>
-      </div>
-    </div>
-    <p class="reassure rv">見学だけでも構いません。</p>
-    <div class="rooms2 rv">
-      <div class="room2">
-        <small>全世代</small>
-        <h3>港区立高輪いきいきプラザ</h3>
-        <p class="sub2">港区高輪三丁目１８番１５号</p>
-        <a class="tel" href="tel:0334491643">03-3449-1643</a>
-        <p class="hours">受付時間　9:00〜21:30（日曜は17：00まで）</p>
-      </div>
-      <div class="room2">
-        <small>小・中・高校生</small>
-        <h3>神明子ども中高生プラザ</h3>
-        <p class="sub2">浜松町一丁目６番７号　プラザ神明５，６階</p>
-        <a class="tel" href="tel:0357335199">03-5733-5199</a>
-        <p class="hours">受付時間　9:30〜20:00</p>
-      </div>
-    </div>
-    <div class="direct rv">
-      <p>講師・片岡雨山へ直接ご連絡いただいても構いません。</p>
-      <a class="mail" href="mailto:mt.rain@outlook.com?subject=%E5%B0%BA%E5%85%AB%E6%95%99%E5%AE%A4%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">mt.rain@outlook.com</a>
-    </div>
-  </div>
-</section>
-
 <section id="contact">
   <div class="wrap">
     <div class="head rv">
-      <span class="num">六</span>
+      <span class="num">＊</span>
       <div>
         <h2>そのほかのお問い合わせ</h2>
         <p>下記のご用件は、片岡雨山あてに直接メールでご連絡ください。</p>
@@ -277,6 +287,7 @@
       <a href="en.html">English</a>
     </div>
     <p>高輪尺八教室（港区立高輪いきいきプラザ）／神明尺八教室（港区立神明子ども中高生プラザ）<br>講師　都山流尺八 大師範　片岡雨山</p>
+    <p class="owner">このサイトは、講師の片岡雨山が個人で運営しています。</p>
   </div>
 </footer>
 

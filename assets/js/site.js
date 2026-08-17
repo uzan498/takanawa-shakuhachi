@@ -162,12 +162,13 @@
     els.forEach(function (e) { io.observe(e); });
   }
 
-  /* ── 左のレールと、スマホ下部のボタン ── */
+  /* ── 左のレールと、スマホ下部のボタン ──
+     セクションの並び順を変えても壊れないよう、位置ではなく
+     「いまどのセクションの中にいるか」で判定しています。       */
   function railAndCta() {
     var rail = document.querySelector('.rail');
     var mcta = document.getElementById('mcta');
     var hero = document.getElementById('top');
-    var artist = document.getElementById('artist');
     var apply = document.getElementById('apply');
     if (!rail && !mcta) return;
 
@@ -176,18 +177,21 @@
 
     function sync() {
       var y = window.scrollY + window.innerHeight * 0.42;
+
       if (rail) {
-        var cur = -1;
-        secs.forEach(function (s, i) { if (s && s.offsetTop <= y) cur = i; });
+        /* 到達済みのうち、いちばん下にあるものを現在地とする。
+           レールの並びとDOMの並びがずれていても正しく灯る。 */
+        var cur = -1, top = -1;
+        secs.forEach(function (s, i) {
+          if (s && s.offsetTop <= y && s.offsetTop >= top) { top = s.offsetTop; cur = i; }
+        });
         links.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
-        var inHero = hero && window.scrollY < hero.offsetHeight - 40;
-        var inArtist = artist && y > artist.offsetTop && y < artist.offsetTop + artist.offsetHeight;
-        rail.classList.toggle('dark', !!(inHero || inArtist));
       }
-      if (mcta && apply) {
-        var progress = (window.scrollY + window.innerHeight) / document.body.scrollHeight;
-        mcta.classList.toggle('show',
-          progress > 0.5 && window.scrollY + window.innerHeight < apply.offsetTop + 200);
+
+      if (mcta && hero) {
+        /* ヒーローを抜けたら出す。申し込みを見ている間だけ引っ込める。 */
+        var inApply = apply && y > apply.offsetTop && y < apply.offsetTop + apply.offsetHeight;
+        mcta.classList.toggle('show', window.scrollY > hero.offsetHeight && !inApply);
       }
     }
     window.addEventListener('scroll', sync, { passive: true });
@@ -195,10 +199,45 @@
     sync();
   }
 
+  /* ── スマホのメニュー ── */
+  function menu() {
+    var btn = document.getElementById('hbg');
+    var panel = document.getElementById('menu');
+    if (!btn || !panel) return;
+
+    function open() {
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'メニューを閉じる');
+      document.body.classList.add('menu-open');
+    }
+    function close() {
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'メニューを開く');
+      document.body.classList.remove('menu-open');
+    }
+    function isOpen() { return panel.classList.contains('open'); }
+
+    btn.addEventListener('click', function () { isOpen() ? close() : open(); });
+    panel.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && isOpen()) { close(); btn.focus(); }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 960 && isOpen()) close();
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     loadGigs();
     reveal();
     railAndCta();
+    menu();
     setupLightbox();
   });
 })();
