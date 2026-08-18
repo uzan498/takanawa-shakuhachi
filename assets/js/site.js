@@ -209,14 +209,14 @@
       panel.classList.add('open');
       panel.setAttribute('aria-hidden', 'false');
       btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'メニューを閉じる');
+      btn.setAttribute('aria-label', btn.getAttribute('data-label-close') || 'メニューを閉じる');
       document.body.classList.add('menu-open');
     }
     function close() {
       panel.classList.remove('open');
       panel.setAttribute('aria-hidden', 'true');
       btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'メニューを開く');
+      btn.setAttribute('aria-label', btn.getAttribute('data-label-open') || 'メニューを開く');
       document.body.classList.remove('menu-open');
     }
     function isOpen() { return panel.classList.contains('open'); }

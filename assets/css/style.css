@@ -7,7 +7,7 @@
   --shu:#C4442E;
   --shu-d:#A63722;
   --body:#3B4448;
-  --grey:#616B6C;
+  --grey:#454F50;
   --line:rgba(15,25,34,.13);
   --line-d:rgba(245,243,237,.18);
   --g:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
@@ -42,6 +42,8 @@ header{background:var(--paper);border-bottom:1px solid var(--line);position:stic
 .hnav a{text-decoration:none;color:#3D4749;padding-bottom:3px;border-bottom:1px solid transparent;white-space:nowrap}
 .hnav a:hover,.hnav a:focus-visible{color:var(--shu-d);border-color:var(--shu)}
 .hnav a[aria-current="page"]{color:var(--navy);border-color:var(--shu)}
+.cta{background:var(--navy);border:1px solid var(--navy) !important;padding:6px 15px;letter-spacing:.1em;color:var(--paper) !important}
+.cta:hover,.cta:focus-visible{background:var(--shu-d);border-color:var(--shu-d) !important;color:var(--paper) !important}
 .en{font-size:12px !important;letter-spacing:.16em;border:1px solid var(--line) !important;padding:6px 13px;color:var(--navy) !important}
 .en:hover,.en:focus-visible{background:var(--navy);color:var(--paper) !important;border-color:var(--navy) !important}
 @media(max-width:960px){.hnav a:not(.en){display:none}}
@@ -126,7 +128,7 @@ section{padding:118px 0}
 .head{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:start;margin-bottom:56px}
 .num{writing-mode:vertical-rl;font-family:var(--m);font-size:14px;letter-spacing:.32em;color:var(--shu-d);padding-top:9px}
 h2{margin:0;font-weight:300;font-size:clamp(26px,4.2vw,42px);letter-spacing:.03em;line-height:1.45}
-.head p{margin:16px 0 0;color:var(--grey);font-size:15px}
+.head p{margin:16px 0 0;color:var(--body);font-size:15px}
 @media(max-width:700px){section{padding:78px 0}.head{gap:16px;margin-bottom:36px}.num{writing-mode:horizontal-tb;padding-top:0}}
 
 /* ── 対象の振り分け ── */
@@ -255,8 +257,9 @@ details p{margin:16px 0 0;font-size:15px;color:var(--body);max-width:46em}
 @media(max-width:860px){.ptop{grid-template-columns:1fr;gap:36px;margin-bottom:48px}.plower-grid{grid-template-columns:1fr;gap:40px}}
 
 /* ── 申し込み ── */
-.apply{background:var(--paper-2)}
 .reassure{font-family:var(--m);font-size:clamp(20px,3vw,27px);letter-spacing:.04em;margin:0 0 44px;padding-left:20px;border-left:3px solid var(--shu);line-height:1.85}
+.reassure.tight{margin-bottom:20px}
+.apnote{margin:0 0 44px;font-size:15px;color:var(--body);line-height:1.95}
 .applybox{border:1px solid var(--line);background:var(--paper-2)}
 .venue2{padding:32px 34px 26px;border-bottom:1px solid var(--line)}
 .venue2 h3{margin:0 0 6px;font-weight:400;font-size:21px;letter-spacing:.05em;line-height:1.6}
