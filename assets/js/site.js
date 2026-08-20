@@ -25,6 +25,10 @@
       })
       .then(function (data) {
         var items = (data && data.performances) || [];
+        /* 日付の新しい順に並べ替える。gigs.json の記載順は問わない。 */
+        items = items.slice().sort(function (a, b) {
+          return String(b.date || '').localeCompare(String(a.date || ''));
+        });
         if (latest) renderLatest(latest, items);
         if (cards) renderCards(cards, items.slice(0, 3));
         if (list) renderList(list, items);
@@ -71,13 +75,20 @@
       el.innerHTML = '<li><p>現在お知らせできる出演情報はありません。</p></li>';
       return;
     }
+    var shownYear = '';
     el.innerHTML = items.map(function (g) {
+      var year = String(g.date || '').slice(0, 4);
+      var head = '';
+      if (year && year !== shownYear) {
+        shownYear = year;
+        head = '<li class="year">' + esc(year) + '年</li>';
+      }
       var thumb = g.flyer
         ? '<div class="thumb"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"' +
           ' data-flyer="' + esc(g.flyer) + '" data-flyer-back="' + esc(g.flyerBack || '') + '" data-title="' + esc(g.title) + '"></div>'
         : '<div class="thumb">チラシなし</div>';
       var lines = [g.venue, g.time].filter(Boolean).map(esc).join('<br>');
-      return '<li>' + thumb + '<div>' +
+      return head + '<li>' + thumb + '<div>' +
         '<time>' + esc(g.date) + '</time>' +
         '<h3>' + esc(g.title) + '</h3>' +
         '<p>' + lines + '</p>' +
