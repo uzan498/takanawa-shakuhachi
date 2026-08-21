@@ -263,28 +263,11 @@
     });
   }
 
-  /* ── 動画（押されてから読み込む） ── */
-  function setupVideos() {
-    document.addEventListener('click', function (e) {
-      var btn = e.target.closest('.pv');
-      if (!btn) return;
-      var id = btn.getAttribute('data-video');
-      if (!id) return;
-      var frame = document.createElement('iframe');
-      frame.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
-      frame.title = btn.getAttribute('data-video-title') || '';
-      frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      frame.allowFullscreen = true;
-      btn.parentNode.replaceChild(frame, btn);
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     loadGigs();
     reveal();
     railAndCta();
     menu();
     setupLightbox();
-    setupVideos();
   });
 })();
