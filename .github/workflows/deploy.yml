@@ -1,0 +1,87 @@
+name: Build and deploy to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y imagemagick
+
+      - name: Copy site files
+        run: |
+          mkdir -p _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
+
+      # gigs.json の flyer / flyerBack に書かれた画像だけを縮小する。
+      # 生成先は「元画像と同じ階層の r/」なので、
+      # あとで images/flyers/ に移動しても、このファイルは無修正で動く。
+      - name: Generate flyer variants
+        run: |
+          IM=magick
+          command -v magick >/dev/null || IM=convert
+
+          python3 - > flyers.txt <<'PY'
+          import json
+          paths = []
+          data = json.load(open('gigs.json', encoding='utf-8'))
+          for gig in data.get('performances', []):
+              for key in ('flyer', 'flyerBack'):
+                  value = (gig.get(key) or '').strip()
+                  if value and not value.startswith(('http://', 'https://')):
+                      paths.append(value)
+          print('\n'.join(sorted(set(paths))))
+          PY
+
+          made=0
+          while IFS= read -r f; do
+            [ -n "$f" ] || continue
+            if [ ! -f "$f" ]; then
+              echo "::warning::gigs.json に書かれているが実在しない: $f"
+              continue
+            fi
+            dir=$(dirname "$f")
+            base=$(basename "$f")
+            name="${base%.*}"
+            mkdir -p "_site/$dir/r"
+            for w in 300 600 1200; do
+              "$IM" "$f" -auto-orient -resize "${w}x>" -quality 82 -strip \
+                "_site/$dir/r/${name}-${w}.webp"
+            done
+            made=$((made + 1))
+            echo "  ok: $f"
+          done < flyers.txt
+
+          echo "縮小したフライヤー: ${made} 枚"
+          du -sh _site/images/*/ 2>/dev/null || true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
