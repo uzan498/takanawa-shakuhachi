@@ -11,6 +11,27 @@
       .replace(/"/g, '&quot;');
   };
 
+  /* images/xxx.jpg → images/r/xxx-600.webp */
+  function variant(p, w) {
+    var i = p.lastIndexOf('/');
+    var dir = i < 0 ? '' : p.slice(0, i + 1);
+    var name = (i < 0 ? p : p.slice(i + 1)).replace(/\.[^.]+$/, '');
+    return dir + 'r/' + name + '-' + w + '.webp';
+  }
+
+  function flyerImg(g, sizes) {
+    var v = function (w) { return esc(variant(g.flyer, w)); };
+    return '<img src="' + v(600) + '"' +
+      ' srcset="' + v(300) + ' 300w, ' + v(600) + ' 600w, ' + v(1200) + ' 1200w"' +
+      ' sizes="' + sizes + '" loading="lazy" decoding="async"' +
+      ' alt="' + esc(g.title) + 'のチラシ"' +
+      ' data-flyer="' + esc(g.flyer) + '"' +
+      ' data-flyer-back="' + esc(g.flyerBack || '') + '"' +
+      ' data-title="' + esc(g.title) + '"' +
+      ' onerror="this.onerror=null;this.removeAttribute(\'srcset\');' +
+      'this.src=this.getAttribute(\'data-flyer\')">';
+  }
+
   /* ── 出演情報の読み込み ── */
   function loadGigs() {
     var latest = document.getElementById('latest-line');
@@ -56,8 +77,7 @@
     if (!items.length) { el.parentNode.style.display = 'none'; return; }
     el.innerHTML = items.map(function (g) {
       var flyer = g.flyer
-        ? '<div class="flyer"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"' +
-          ' data-flyer="' + esc(g.flyer) + '" data-flyer-back="' + esc(g.flyerBack || '') + '" data-title="' + esc(g.title) + '"></div>'
+        ? '<div class="flyer">' + flyerImg(g, '(max-width:860px) 92vw, 340px') + '</div>'
         : '<div class="flyer">チラシなし</div>';
       var meta = [g.venue, g.time, g.note].filter(Boolean).map(esc).join('<br>');
       var inner = flyer +
@@ -84,8 +104,7 @@
         head = '<li class="year">' + esc(year) + '年</li>';
       }
       var thumb = g.flyer
-        ? '<div class="thumb"><img src="' + esc(g.flyer) + '" alt="' + esc(g.title) + 'のチラシ" loading="lazy"' +
-          ' data-flyer="' + esc(g.flyer) + '" data-flyer-back="' + esc(g.flyerBack || '') + '" data-title="' + esc(g.title) + '"></div>'
+        ? '<div class="thumb">' + flyerImg(g, '150px') + '</div>'
         : '<div class="thumb">チラシなし</div>';
       var lines = [g.venue, g.time].filter(Boolean).map(esc).join('<br>');
       return head + '<li>' + thumb + '<div>' +
