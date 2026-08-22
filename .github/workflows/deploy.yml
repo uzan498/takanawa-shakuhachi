@@ -30,6 +30,16 @@ jobs:
           mkdir -p _site
           rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
 
+      # SNS に貼ったときのカード画像。hero-wide.jpg から 1200x630 を切り出す。
+      # 被写体が右寄りなので、切り取りは右端に合わせる。
+      - name: Generate OGP image
+        run: |
+          IM=magick
+          command -v magick >/dev/null || IM=convert
+
+          "$IM" images/hero-wide.jpg -auto-orient -resize 1200x630^ -gravity east -extent 1200x630 -quality 85 -strip _site/images/ogp.jpg
+          echo "OGP 画像を生成: _site/images/ogp.jpg"
+
       # gigs.json の flyer / flyerBack に書かれた画像だけを縮小する。
       # 生成先は「元画像と同じ階層の r/」なので、
       # あとで images/flyers/ に移動しても、このファイルは無修正で動く。
